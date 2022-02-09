@@ -1,0 +1,5 @@
+generated.h
+*.exe
+*.dll
+*.step
+*.obj
