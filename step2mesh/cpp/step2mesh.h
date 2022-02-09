@@ -26,7 +26,7 @@ extern "C" {
 
 Mesh *mesh_from_step(const char *str);
 
-void mesh_free(Mesh *mesh);
+void mesh_free(Mesh *ptr_mesh);
 
 void mesh_get_stats(const Mesh *ptr_mesh, MeshStats *ptr_stat);
 

@@ -39,8 +39,8 @@ pub mod step2mesh {
     }
 
     #[no_mangle]
-    pub extern "C" fn mesh_free(mesh: *mut Mesh) {
-        unsafe { Box::from_raw(mesh); }
+    pub extern "C" fn mesh_free(ptr_mesh: *mut Mesh) {
+        unsafe { Box::from_raw(ptr_mesh); }
     }
 
     #[no_mangle]
