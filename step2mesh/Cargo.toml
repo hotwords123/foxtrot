@@ -1,0 +1,12 @@
+[package]
+name = "step2mesh"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+triangulate = { path = "../triangulate" }
+step = { path = "../step" }
+
+[lib]
+name = "step2mesh"
+crate-type = ["cdylib"]

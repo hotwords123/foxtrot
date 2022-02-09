@@ -50,4 +50,18 @@ impl Mesh {
         }
         std::fs::write(filename, out)
     }
+
+    pub fn save_obj(&self, filename: &str) -> std::io::Result<()> {
+        use std::io::Write;
+        let mut file = std::fs::File::create(filename)?;
+        // write vertices
+        for v in self.verts.iter() {
+            writeln!(&mut file, "v {} {} {}", v.pos.x, v.pos.y, v.pos.z)?;
+        }
+        // write faces
+        for t in self.triangles.iter() {
+            writeln!(&mut file, "f {} {} {}", t.verts[0] + 1, t.verts[1] + 1, t.verts[2] + 1)?;
+        }
+        file.flush()
+    }
 }
