@@ -56,7 +56,7 @@ impl Mesh {
         let mut file = std::fs::File::create(filename)?;
         // write vertices
         for v in self.verts.iter() {
-            writeln!(&mut file, "v {} {} {}", v.pos.x, v.pos.y, v.pos.z)?;
+            writeln!(&mut file, "v {:.9} {:.9} {:.9}", v.pos.x, v.pos.y, v.pos.z)?;
         }
         // write faces
         for t in self.triangles.iter() {

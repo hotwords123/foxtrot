@@ -32,6 +32,8 @@ void mesh_get_stats(const Mesh *ptr_mesh, MeshStats *ptr_stat);
 
 void mesh_export(const Mesh *ptr_mesh, MeshPoint3d *ptr_verts, MeshIndexedTriangle *ptr_faces);
 
+int mesh_save_obj(const Mesh *ptr_mesh, const char *filename);
+
 } // extern "C"
 
 } // namespace step2mesh

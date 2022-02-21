@@ -96,6 +96,17 @@ void mesh_export(const Mesh *ptr_mesh, MeshPoint3d *ptr_verts, MeshIndexedTriang
 - `ptr_verts`：指向要写入所有顶点信息的 `MeshPoint3d` 数组的指针。
 - `ptr_faces`：指向要写入所有面信息的 `MeshIndexedTriangle` 数组的指针。
 
+#### `mesh_save_obj`
+```cpp
+int mesh_save_obj(const Mesh *ptr_mesh, const char *filename);
+```
+将 `Mesh` 对象保存为文本 obj 文件。
+
+##### 返回值
+零值表示成功，非零值表示失败。
+- `1`：`filename` 解析失败
+- `2`：文件写入失败
+
 ## 样例代码
 
 样例 C++ 程序位于 `cpp/example.cpp`，它可以将 STEP 格式转换为 OBJ 格式。

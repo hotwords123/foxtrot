@@ -71,4 +71,19 @@ pub mod step2mesh {
             verts[i].z = vert.pos.z;
         }
     }
+
+    #[no_mangle]
+    pub extern "C" fn mesh_save_obj(ptr_mesh: *const Mesh, filename: *const c_char) -> c_int {
+        let mesh = unsafe { &*ptr_mesh };
+        let filename = unsafe {
+            match CStr::from_ptr(filename).to_str() {
+                Ok(str) => str,
+                Err(_) => { return 1; }
+            }
+        };
+        match mesh.save_stl(filename) {
+            Ok(()) => 0,
+            Err(_) => 2
+        }
+    }
 }
