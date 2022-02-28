@@ -64,6 +64,18 @@ Mesh *mesh_from_step(const char *str);
 ##### 返回值
 指向内部 `Mesh` 对象的指针。如果解析失败，则返回空指针。
 
+#### `mesh_read_step`
+```cpp
+Mesh *mesh_read_step(const char *filename);
+```
+读取 STEP 格式文件，解析内容并对其中实体进行网格化。
+
+##### 参数
+- `filename`：要读取的 STEP 文件路径。
+
+##### 返回值
+指向内部 `Mesh` 对象的指针。如果解析失败，则返回空指针。
+
 #### `mesh_free`
 ```cpp
 void mesh_free(Mesh *ptr_mesh);
@@ -100,7 +112,18 @@ void mesh_export(const Mesh *ptr_mesh, MeshPoint3d *ptr_verts, MeshIndexedTriang
 ```cpp
 int mesh_save_obj(const Mesh *ptr_mesh, const char *filename);
 ```
-将 `Mesh` 对象保存为文本 obj 文件。
+将 `Mesh` 对象保存为文本 OBJ 文件。
+
+##### 返回值
+零值表示成功，非零值表示失败。
+- `1`：`filename` 解析失败
+- `2`：文件写入失败
+
+#### `mesh_save_obj`
+```cpp
+int mesh_save_stl(const Mesh *ptr_mesh, const char *filename);
+```
+将 `Mesh` 对象保存为 STL 文件。
 
 ##### 返回值
 零值表示成功，非零值表示失败。
