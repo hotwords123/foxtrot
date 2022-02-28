@@ -39,6 +39,18 @@ pub mod step2mesh {
     }
 
     #[no_mangle]
+    pub extern "C" fn mesh_read_step(str: *const c_char) -> *mut Mesh {
+        catch_unwind(|| {
+            let path = unsafe { CStr::from_ptr(str).to_str().unwrap() };
+            let data = std::fs::read(path).unwrap();
+            let flattened = StepFile::strip_flatten(&data);
+            let entities = StepFile::parse(&flattened);
+            let (mesh, _) = triangulate(&entities);
+            Box::into_raw(Box::new(mesh))
+        }).unwrap_or(std::ptr::null_mut())
+    }
+
+    #[no_mangle]
     pub extern "C" fn mesh_free(ptr_mesh: *mut Mesh) {
         unsafe { Box::from_raw(ptr_mesh); }
     }
@@ -81,8 +93,23 @@ pub mod step2mesh {
                 Err(_) => { return 1; }
             }
         };
+        match mesh.save_obj(filename) {
+            Ok(_) => 0,
+            Err(_) => 2
+        }
+    }
+
+    #[no_mangle]
+    pub extern "C" fn mesh_save_stl(ptr_mesh: *const Mesh, filename: *const c_char) -> c_int {
+        let mesh = unsafe { &*ptr_mesh };
+        let filename = unsafe {
+            match CStr::from_ptr(filename).to_str() {
+                Ok(str) => str,
+                Err(_) => { return 1; }
+            }
+        };
         match mesh.save_stl(filename) {
-            Ok(()) => 0,
+            Ok(_) => 0,
             Err(_) => 2
         }
     }
