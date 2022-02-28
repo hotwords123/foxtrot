@@ -50,6 +50,9 @@ int main(int argv, char **argc) {
     std::vector<MeshIndexedTriangle> faces(stats.num_faces);
     mesh_export(mesh, verts.data(), faces.data());
 
+    mesh_free(mesh);
+    mesh = nullptr;
+
     std::ofstream out_file(out_path);
     if (!out_file.is_open()) {
         std::cerr << "failed to open output file" << std::endl;
