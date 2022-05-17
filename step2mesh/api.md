@@ -132,10 +132,18 @@ int mesh_save_stl(const Mesh *ptr_mesh, const char *filename);
 
 ## 样例代码
 
+### 样例 1
+
 样例 C++ 程序位于 `cpp/example.cpp`，它可以将 STEP 格式转换为 OBJ 格式。
 
-GCC 编译命令：`g++ example.cpp -o example -lstep2mesh -L../../target/debug`。暂未在 MSVC 下测试。
+GCC 编译命令：`g++ example.cpp -o example -lstep2mesh -L../../target/debug`。Visual Studio 下需要将项目根目录下 `target/debug` 添加到库目录，在附加依赖项中添加 `step2mesh.dll.lib`。Release 模式同理。
 
 运行前需要手动把生成的动态链接库复制到同一目录下。
 
 命令格式：`example <input> <output>`，其中 `input` 是输入的 STEP 文件路径，`output` 是输出的 OBJ 文件路径。
+
+### 样例 2
+
+样例 C++ 程序位于 `cpp/example2.cpp`，它可以将 STEP 格式转换为 OBJ 格式或 STL 格式。
+
+编译运行的方法、命令格式与样例 1 相同。
